@@ -60,7 +60,8 @@ public class GetBranches extends HttpServlet {
 				}
 				jsonArray.put(jsonObject);
 			}
-
+			System.out.println(jsonArray.toString());
+			System.out.println("ciao");
 			response.setContentType("application/json");
 			response.getWriter().write(jsonArray.toString());
 
