@@ -37,17 +37,17 @@ public class GetCourses extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		response.setHeader("Access-Control-Allow-Origin", "*");
-	    response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-	    response.setHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Type");
+		response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+		response.setHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Type");
 		JSONArray jsonArray = new JSONArray();
 		try {
 			Connection con = Database.getConnection();
-			String sql = "SELECT courses.name, teacher.name as 'teachername' FROM courses INNER JOIN teacher ON courses.teacherId = teacher.teacherId";
+			String sql = "SELECT  courses.*, teacher.name AS 'teacher_name', teacher.surname AS 'teacher_surname'  FROM courses INNER JOIN teacher  ON courses.teacherId = teacher.teacherId";
 
 			PreparedStatement ps = con.prepareStatement(sql);
 
@@ -58,10 +58,14 @@ public class GetCourses extends HttpServlet {
 			while (rs.next()) {
 				JSONObject jsonObject = new JSONObject();
 				for (int i = 1; i <= columnCount; i++) {
-					String columnName = rsmd.getColumnName(i);
+
+					String columnName = rsmd.getColumnLabel(i);
 					Object value = rs.getObject(columnName);
+
 					jsonObject.put(columnName, value);
+
 				}
+				System.out.println("-------");
 				jsonArray.put(jsonObject);
 			}
 			response.setContentType("application/json");
