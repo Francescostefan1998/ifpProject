@@ -39,6 +39,9 @@ public class GetTeacher extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setHeader("Access-Control-Allow-Origin", "*");
+	    response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+	    response.setHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Type");
 		JSONArray jsonArray = new JSONArray();
 		try {
 			Connection con = Database.getConnection();

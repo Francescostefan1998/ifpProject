@@ -37,12 +37,17 @@ public class GetCourses extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		response.setHeader("Access-Control-Allow-Origin", "*");
+	    response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+	    response.setHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Type");
 		JSONArray jsonArray = new JSONArray();
 		try {
 			Connection con = Database.getConnection();
-			String sql = "select * from courses";
+			String sql = "SELECT courses.name, teacher.name as 'teachername' FROM courses INNER JOIN teacher ON courses.teacherId = teacher.teacherId";
 
 			PreparedStatement ps = con.prepareStatement(sql);
 
