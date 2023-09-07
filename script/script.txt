@@ -1,0 +1,49 @@
+use ifp;
+create table teacher (
+teacherId int auto_increment primary key,
+name varchar(255),
+surname varchar(255),
+title varchar(255)
+);
+
+create table courses (
+courseId int auto_increment primary key,
+name varchar(255),
+duration int,
+teacherId int,
+graduation_title varchar(255),
+foreign key (teacherId) references teacher(teacherId)
+);
+
+create table branches(
+branchId int auto_increment primary key,
+city varchar(255),
+address varchar(255),
+tel varchar(255));
+
+-- Inserting into teacher table
+insert into teacher (name, surname, title) values ('Daniele', 'Rossi', 'diploma');
+insert into teacher (name, surname, title) values ('Mario', 'Franceschini', 'laurea');
+insert into teacher (name, surname, title) values ('Mario', 'Bianchi', 'laurea');
+insert into teacher (name, surname, title) values ('Laura', 'Bianchi', 'laurea');
+insert into teacher (name, surname, title) values ('Giuseppe', 'Altobelli', 'diploma');
+insert into teacher (name, surname, title) values ('Franco', 'Rossi', 'laurea');
+insert into teacher (name, surname, title) values ('Andrea', 'Testini', 'laurea');
+insert into teacher (name, surname, title) values ('Sergio', 'Russo', 'laurea');
+
+-- Inserting into courses table
+insert into courses (name, duration, teacherId, graduation_title) values ('Amministrazione Aziendale', 500, 1, 'laurea');
+insert into courses (name, duration, teacherId, graduation_title) values ('Digital Marketing', 400, 2, 'diploma');
+insert into courses (name, duration, teacherId, graduation_title) values ('Moda', 300, 3, 'laurea');
+insert into courses (name, duration, teacherId, graduation_title) values ('Segreteria ed Amministrazione', 350, 4, 'laurea');
+insert into courses (name, duration, teacherId, graduation_title) values ('Web Design e Graphic Design', 540, 5, 'diploma');
+insert into courses (name, duration, teacherId, graduation_title) values ('Social Media Manager', 510, 6, 'laurea');
+insert into courses (name, duration, teacherId, graduation_title) values ('Animatore Sociale', 380, 7, 'laurea');
+insert into courses (name, duration, teacherId, graduation_title) values ('Educazione dell’Infanzia', 390, 8, 'laurea');
+
+-- Inserting into branches table
+insert into branches (city, address, tel) values ('Milano', 'via Mazzini 34', '024444');
+insert into branches (city, address, tel) values ('Treviso', 'via Cavour 67', '03466666');
+insert into branches (city, address, tel) values ('Padova', 'via Vittorio Emanuele 31', '08955555');
+insert into branches (city, address, tel) values ('Bari', 'via Firenze 56', '349888');
+insert into branches (city, address, tel) values ('Torino', 'via dei Mulini 87', '011456666');
